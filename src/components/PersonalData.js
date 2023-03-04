@@ -7,7 +7,7 @@ export default class PersonalData extends React.Component {
     this.state = {
       name: '',
       email: '',
-      cpf: null,
+      cpf: '',
     };
   }
 
@@ -18,7 +18,6 @@ export default class PersonalData extends React.Component {
       value = value.toUpperCase();
     }
 
-    console.log(value);
     this.setState({
       [name]: value,
     });

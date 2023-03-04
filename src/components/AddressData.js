@@ -1,70 +1,92 @@
-// import React from 'react';
+import React from 'react';
+import countryStates from '../countryStates';
 
-// export default class Address extends React.Component {
-//   constructor() {
-//     super();
+export default class Address extends React.Component {
+  constructor() {
+    super();
 
-//     this.state = {
-//       endereco: '',
-//       email: '',
-//       cpf: null,
-//     };
-//   }
+    this.state = {
+      address: '',
+      city: '',
+      state: '',
+      addressType: '',
+    };
+  }
 
-//   handleChange = ({ target }) => {
-//     let { value } = target;
-//     const { name } = target;
-//     const ADDRESS_LIMIT = 200;
-//     const EMAIL_LIMIT = 50;
-//     const CPF_LIMIT = 11;
-//     if (name === 'name') {
-//       value = value.toUpperCase();
-//       if (value.length > NAME_LIMIT) return;
-//     }
-//     if (name === 'email' && value.length > EMAIL_LIMIT) return;
-//     if (name === 'cpf' && value.length > CPF_LIMIT) return;
+  handleChange = ({ target }) => {
+    const { name, value } = target;
 
-//     console.log(value);
-//     this.setState({
-//       [name]: value,
-//     });
-//   };
+    this.setState({
+      [name]: value,
+    });
+  };
 
-//   render() {
-//     const { endereco, email, cpf } = this.state;
-//     return (
-//       <fieldset>
-//         <label htmlFor="endereco">
-//           Endereço
-//           <input
-//             type="text"
-//             value={ endereco }
-//             name="endereco"
-//             id="endereco"
-//             onChange={ this.handleChange }
-//           />
-//         </label>
-//         <label htmlFor="email">
-//           Email
-//           <input
-//             type="email"
-//             value={ email }
-//             name="email"
-//             id="email"
-//             onChange={ this.handleChange }
-//           />
-//         </label>
-//         <label htmlFor="cpf">
-//           CPF
-//           <input
-//             type="text"
-//             value={ cpf }
-//             name="cpf"
-//             id="cpf"
-//             onChange={ this.handleChange }
-//           />
-//         </label>
-//       </fieldset>
-//     );
-//   }
-// }
+  render() {
+    const { address, city, state, addressType } = this.state;
+    return (
+      <fieldset>
+        <label htmlFor="address">
+          Endereço
+          <input
+            type="text"
+            value={ address }
+            name="address"
+            id="address"
+            onChange={ this.handleChange }
+            maxLength="200"
+          />
+        </label>
+        <label htmlFor="city">
+          Cidade
+          <input
+            type="text"
+            value={ city }
+            name="city"
+            id="city"
+            onChange={ this.handleChange }
+            maxLength="28"
+            // onBlur={ this.handleCityBlur }
+          />
+        </label>
+        <label htmlFor="state">
+          Estado
+          <select
+            value={ state }
+            name="state"
+            id="state"
+            onChange={ this.handleChange }
+          >
+            {countryStates
+              .map((item) => <option key={ item }>{item}</option>)}
+          </select>
+        </label>
+        <label>
+          Tipo
+          <label>
+            Casa
+            <input
+              type="radio"
+              id="house"
+              name="addressType"
+              value="house"
+              checked={ addressType === 'house' }
+              onChange={ this.handleChange }
+            />
+          </label>
+
+          <label>
+            Apartamento
+            <input
+              type="radio"
+              id="apart"
+              name="addressType"
+              value="apart"
+              checked={ addressType === 'apart' }
+              onChange={ this.handleChange }
+            />
+          </label>
+        </label>
+      </fieldset>
+    );
+  }
+}
