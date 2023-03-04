@@ -7,16 +7,27 @@ export default class PersonalData extends React.Component {
     this.state = {
       name: '',
       email: '',
-      cpf: 0,
+      cpf: null,
     };
   }
 
   handleChange = ({ target }) => {
-    const { name, value } = target;
+    let { value } = target;
+    const { name } = target;
+    const NAME_LIMIT = 40;
+    const EMAIL_LIMIT = 50;
+    const CPF_LIMIT = 11;
+    if (name === 'name') {
+      value = value.toUpperCase();
+      if (value.length > NAME_LIMIT) return;
+    }
+    if (name === 'email' && value.length > EMAIL_LIMIT) return;
+    if (name === 'cpf' && value.length > CPF_LIMIT) return;
+
     console.log(value);
-    this.setState(() => ({
+    this.setState({
       [name]: value,
-    }));
+    });
   };
 
   render() {
