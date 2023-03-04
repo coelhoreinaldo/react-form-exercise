@@ -1,11 +1,12 @@
 import React from 'react';
+import PersonalData from './components/PersonalData';
 
 class App extends React.Component {
   render() {
     return (
-      <h1>
-        My React Form
-      </h1>
+      <form>
+        <PersonalData />
+      </form>
     );
   }
 }
