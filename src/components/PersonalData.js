@@ -14,15 +14,9 @@ export default class PersonalData extends React.Component {
   handleChange = ({ target }) => {
     let { value } = target;
     const { name } = target;
-    const NAME_LIMIT = 40;
-    const EMAIL_LIMIT = 50;
-    const CPF_LIMIT = 11;
     if (name === 'name') {
       value = value.toUpperCase();
-      if (value.length > NAME_LIMIT) return;
     }
-    if (name === 'email' && value.length > EMAIL_LIMIT) return;
-    if (name === 'cpf' && value.length > CPF_LIMIT) return;
 
     console.log(value);
     this.setState({
@@ -38,6 +32,7 @@ export default class PersonalData extends React.Component {
           Nome
           <input
             type="text"
+            maxLength="40"
             value={ name }
             name="name"
             id="name"
@@ -48,6 +43,7 @@ export default class PersonalData extends React.Component {
           Email
           <input
             type="email"
+            maxLength="50"
             value={ email }
             name="email"
             id="email"
@@ -58,6 +54,7 @@ export default class PersonalData extends React.Component {
           CPF
           <input
             type="text"
+            maxLength="11"
             value={ cpf }
             name="cpf"
             id="cpf"
