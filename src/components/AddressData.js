@@ -1,5 +1,6 @@
 import React from 'react';
 import countryStates from '../countryStates';
+import handleValue from '../utils/handleValue';
 
 export default class Address extends React.Component {
   constructor() {
@@ -9,16 +10,34 @@ export default class Address extends React.Component {
       address: '',
       city: '',
       state: '',
-      addressType: '',
+      addressType: 'house',
     };
   }
 
   handleChange = ({ target }) => {
     const { name, value } = target;
 
-    this.setState({
-      [name]: value,
-    });
+    const newValue = handleValue(name, value);
+
+    this.setState((previousState) => ({
+      ...previousState,
+      [name]: newValue,
+    }));
+  };
+
+  handleCityBlur = ({ target }) => {
+    const { name, value } = target;
+
+    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    for (let i = 0; i < numbers.length; i += 1) {
+      if (value.split('')[0].includes(i)) {
+        const newValue = '';
+        this.setState((previousState) => ({
+          ...previousState,
+          [name]: newValue,
+        }));
+      }
+    }
   };
 
   render() {
@@ -45,7 +64,7 @@ export default class Address extends React.Component {
             id="city"
             onChange={ this.handleChange }
             maxLength="28"
-            // onBlur={ this.handleCityBlur }
+            onBlur={ this.handleCityBlur }
           />
         </label>
         <label htmlFor="state">

@@ -1,4 +1,5 @@
 import React from 'react';
+import handleValue from '../utils/handleValue';
 
 export default class PersonalData extends React.Component {
   constructor() {
@@ -12,15 +13,14 @@ export default class PersonalData extends React.Component {
   }
 
   handleChange = ({ target }) => {
-    let { value } = target;
-    const { name } = target;
-    if (name === 'name') {
-      value = value.toUpperCase();
-    }
+    const { name, value } = target;
 
-    this.setState({
-      [name]: value,
-    });
+    const newValue = handleValue(name, value);
+
+    this.setState((previousState) => ({
+      ...previousState,
+      [name]: newValue,
+    }));
   };
 
   render() {
