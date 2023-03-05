@@ -1,6 +1,7 @@
 import React from 'react';
 import AddressData from './components/AddressData';
 import PersonalData from './components/PersonalData';
+import ProfessionalData from './components/ProfessionalData';
 import handleValue from './utils/handleValue';
 
 class App extends React.Component {
@@ -15,6 +16,9 @@ class App extends React.Component {
       city: '',
       state: '',
       addressType: 'house',
+      resume: '',
+      role: '',
+      roleDesc: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -58,6 +62,10 @@ class App extends React.Component {
           onChange={ this.handleChange }
           formInfo={ this.state }
           onBlur={ this.handleCityBlur }
+        />
+        <ProfessionalData
+          onChange={ this.handleChange }
+          formInfo={ this.state }
         />
       </form>
     );
