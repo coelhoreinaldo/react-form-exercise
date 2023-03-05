@@ -1,5 +1,6 @@
 import React from 'react';
 import AddressData from './components/AddressData';
+import DataDisplay from './components/DataDisplay';
 import PersonalData from './components/PersonalData';
 import ProfessionalData from './components/ProfessionalData';
 import handleValue from './utils/handleValue';
@@ -15,14 +16,16 @@ class App extends React.Component {
       address: '',
       city: '',
       state: '',
-      addressType: 'house',
+      addressType: 'casa',
       resume: '',
       role: '',
       roleDesc: '',
+      displayData: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCityBlur = this.handleCityBlur.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target }) {
@@ -51,9 +54,14 @@ class App extends React.Component {
     }
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ displayData: true });
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={ this.handleSubmit }>
         <PersonalData
           onChange={ this.handleChange }
           formInfo={ this.state }
@@ -67,6 +75,8 @@ class App extends React.Component {
           onChange={ this.handleChange }
           formInfo={ this.state }
         />
+        <button type="submit">Enviar</button>
+        <DataDisplay formInfo={ this.state } />
       </form>
     );
   }
