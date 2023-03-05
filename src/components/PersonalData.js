@@ -1,30 +1,10 @@
 import React from 'react';
-import handleValue from '../utils/handleValue';
+import PropTypes from 'prop-types';
 
 export default class PersonalData extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      name: '',
-      email: '',
-      cpf: '',
-    };
-  }
-
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    const newValue = handleValue(name, value);
-
-    this.setState((previousState) => ({
-      ...previousState,
-      [name]: newValue,
-    }));
-  };
-
   render() {
-    const { name, email, cpf } = this.state;
+    const { onChange, formInfo } = this.props;
+    const { name, email, cpf } = formInfo;
     return (
       <fieldset>
         <label htmlFor="name">
@@ -35,7 +15,7 @@ export default class PersonalData extends React.Component {
             value={ name }
             name="name"
             id="name"
-            onChange={ this.handleChange }
+            onChange={ onChange }
           />
         </label>
         <label htmlFor="email">
@@ -46,7 +26,7 @@ export default class PersonalData extends React.Component {
             value={ email }
             name="email"
             id="email"
-            onChange={ this.handleChange }
+            onChange={ onChange }
           />
         </label>
         <label htmlFor="cpf">
@@ -57,10 +37,19 @@ export default class PersonalData extends React.Component {
             value={ cpf }
             name="cpf"
             id="cpf"
-            onChange={ this.handleChange }
+            onChange={ onChange }
           />
         </label>
       </fieldset>
     );
   }
 }
+
+PersonalData.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  formInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    cpf: PropTypes.string.isRequired,
+  }).isRequired,
+};
