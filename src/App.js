@@ -26,6 +26,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleCityBlur = this.handleCityBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   handleChange({ target }) {
@@ -59,10 +60,15 @@ class App extends React.Component {
     this.setState({ displayData: true });
   }
 
+  handleClear(event) {
+    event.preventDefault();
+    this.setState({ displayData: false });
+  }
+
   render() {
     const { displayData } = this.state;
     return (
-      <form onSubmit={ this.handleSubmit }>
+      <form onSubmit={ this.handleSubmit } onReset={ this.handleClear }>
         <PersonalData
           onChange={ this.handleChange }
           formInfo={ this.state }
@@ -77,6 +83,7 @@ class App extends React.Component {
           formInfo={ this.state }
         />
         <button type="submit">Enviar</button>
+        <button type="reset">Limpar</button>
         {displayData && <DataDisplay formInfo={ this.state } />}
       </form>
     );
