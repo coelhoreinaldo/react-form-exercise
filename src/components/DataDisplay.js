@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 
 export default class DataDisplay extends React.Component {
   render() {
-    const { formInfo } = this.props;
-    const {
-      name, email, cpf,
+    const { formInfo: { name, email, cpf,
       address, city, state, addressType,
       resume, role, roleDesc,
-    } = formInfo;
+    } } = this.props;
     return (
       <div>
         <h1>{name}</h1>
-        <p>{`Dados pessoais: ${email}, ${cpf}`}</p>
-        <p>{`Endereço: ${address}, ${city}, ${state}, ${addressType}`}</p>
-        <p>{`Último emprego: ${resume}, ${role}, ${roleDesc}`}</p>
+        <p>{email}</p>
+        <p>{cpf}</p>
+        <p>{address}</p>
+        <p>{city}</p>
+        <p>{state}</p>
+        <p>{addressType}</p>
+        <p>{resume}</p>
+        <p>{role}</p>
+        <p>{roleDesc}</p>
       </div>
     );
   }

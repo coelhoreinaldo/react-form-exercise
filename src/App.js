@@ -6,8 +6,8 @@ import ProfessionalData from './components/ProfessionalData';
 import handleValue from './utils/handleValue';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: '',
@@ -16,11 +16,11 @@ class App extends React.Component {
       address: '',
       city: '',
       state: '',
-      addressType: 'casa',
+      addressType: 'Casa',
       resume: '',
       role: '',
       roleDesc: '',
-      displayData: '',
+      displayData: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -60,6 +60,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { displayData } = this.state;
     return (
       <form onSubmit={ this.handleSubmit }>
         <PersonalData
@@ -76,7 +77,7 @@ class App extends React.Component {
           formInfo={ this.state }
         />
         <button type="submit">Enviar</button>
-        <DataDisplay formInfo={ this.state } />
+        {displayData && <DataDisplay formInfo={ this.state } />}
       </form>
     );
   }

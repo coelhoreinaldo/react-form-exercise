@@ -51,8 +51,8 @@ export default class AddressData extends React.Component {
               type="radio"
               id="casa"
               name="addressType"
-              value="casa"
-              checked={ addressType === 'casa' }
+              value="Casa"
+              checked={ addressType === 'Casa' }
               onChange={ onChange }
             />
           </label>
@@ -63,8 +63,8 @@ export default class AddressData extends React.Component {
               type="radio"
               id="apartamento"
               name="addressType"
-              value="apartamento"
-              checked={ addressType === 'apartamento' }
+              value="Apartamento"
+              checked={ addressType === 'Apartamento' }
               onChange={ onChange }
             />
           </label>
