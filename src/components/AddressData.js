@@ -1,47 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import countryStates from '../countryStates';
-import handleValue from '../utils/handleValue';
 
-export default class Address extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      address: '',
-      city: '',
-      state: '',
-      addressType: 'house',
-    };
-  }
-
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    const newValue = handleValue(name, value);
-
-    this.setState((previousState) => ({
-      ...previousState,
-      [name]: newValue,
-    }));
-  };
-
-  handleCityBlur = ({ target }) => {
-    const { name, value } = target;
-
-    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    for (let i = 0; i < numbers.length; i += 1) {
-      if (value.split('')[0].includes(i)) {
-        const newValue = '';
-        this.setState((previousState) => ({
-          ...previousState,
-          [name]: newValue,
-        }));
-      }
-    }
-  };
-
+export default class AddressData extends React.Component {
   render() {
-    const { address, city, state, addressType } = this.state;
+    const { onChange, onBlur, formInfo } = this.props;
+    const { address, city, state, addressType } = formInfo;
     return (
       <fieldset>
         <label htmlFor="address">
@@ -51,7 +15,7 @@ export default class Address extends React.Component {
             value={ address }
             name="address"
             id="address"
-            onChange={ this.handleChange }
+            onChange={ onChange }
             maxLength="200"
           />
         </label>
@@ -62,9 +26,9 @@ export default class Address extends React.Component {
             value={ city }
             name="city"
             id="city"
-            onChange={ this.handleChange }
+            onChange={ onChange }
             maxLength="28"
-            onBlur={ this.handleCityBlur }
+            onBlur={ onBlur }
           />
         </label>
         <label htmlFor="state">
@@ -73,7 +37,7 @@ export default class Address extends React.Component {
             value={ state }
             name="state"
             id="state"
-            onChange={ this.handleChange }
+            onChange={ onChange }
           >
             {countryStates
               .map((item) => <option key={ item }>{item}</option>)}
@@ -89,7 +53,7 @@ export default class Address extends React.Component {
               name="addressType"
               value="house"
               checked={ addressType === 'house' }
-              onChange={ this.handleChange }
+              onChange={ onChange }
             />
           </label>
 
@@ -101,7 +65,7 @@ export default class Address extends React.Component {
               name="addressType"
               value="apart"
               checked={ addressType === 'apart' }
-              onChange={ this.handleChange }
+              onChange={ onChange }
             />
           </label>
         </label>
@@ -109,3 +73,14 @@ export default class Address extends React.Component {
     );
   }
 }
+
+AddressData.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  formInfo: PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    addressType: PropTypes.string.isRequired,
+  }).isRequired,
+};
